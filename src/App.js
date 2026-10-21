@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useRef, useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const inputRef = useRef(null);
+
+  function normalUpdateCount() {
+    setCount((prev) => prev + 1);
+    inputRef.current.focus();
+  }
+
+  function normalDeductCount() {
+    setCount((prev) => prev - 1);
+  }
+
+  function checkRef() {
+    console.log(inputRef.current.value);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="center">
+      <p>You clicked {count} times</p>
+      <button onClick={normalUpdateCount}>Click me</button>
+      <button onClick={normalDeductCount}>Deduct</button>
+      <input ref={inputRef} />
+      <button onClick={checkRef}>Check Ref</button>
     </div>
   );
 }
